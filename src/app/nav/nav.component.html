@@ -4,9 +4,9 @@
     
     @if (accountServices.currentUser()) {
     <ul  class="navbar-nav me-auto mb-2 mb-md-0">
-      <li class="nav-item"><a class="nav-link " aria-current="page" href="#">Matches</a></li>
-      <li class="nav-item"><a class="nav-link " aria-current="page" href="#">Lists</a></li>
-      <li class="nav-item"><a class="nav-link " aria-current="page" href="#">Messages</a></li>
+      <li class="nav-item"><a routerLink="/members" class="nav-link" routerLinkActive="active" aria-current="page" href="#">Matches</a></li>
+      <li class="nav-item"><a routerLink="/lists"class="nav-link " routerLinkActive="active" aria-current="page" href="#">Lists</a></li>
+      <li class="nav-item"><a routerLink="/messages" class="nav-link " routerLinkActive="active" aria-current="page" href="#">Messages</a></li>
     </ul>
     }
 
@@ -25,7 +25,6 @@
       <input name="password" [(ngModel)]="model.password" class="form-control me-2" type="password" placeholder="Password" />
       <button class="btn btn-outline-success" type="submit">Login</button>
     </form>
-
     }
     
     
