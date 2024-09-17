@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
+
   ngOnInit(): void {
     this.getUsers()
   }
@@ -27,6 +28,10 @@ export class HomeComponent implements OnInit {
       complete: () => console.log("Request has been completed")
     })
 
+  }
+
+  cancelRegistrationMode(event: boolean) {
+    this.registermode = event;
   }
 
 }
