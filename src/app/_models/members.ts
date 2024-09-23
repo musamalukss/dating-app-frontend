@@ -13,6 +13,7 @@ export interface  Member {
     country: string;
     city: string;
     photoUrl: string;
+    introduction:string;
     photos: Photo[];
   }
   
