@@ -1,0 +1,15 @@
+<div class="container">
+    <h1>Internal Server Error</h1>
+    @if (error) {
+        <h5 class="tex-danger">Error: {{error.message}}</h5>
+        <p class="font-weight-bold">Please contact administrator</p>
+        <p>What to do next?</p>
+        <ol>
+            <li>Open chrome developer tools check the endpoint of the failing error. reproduce the error in postman.</li>
+        </ol>
+        <p class="font-weight-bold">Check the stack trace the first 2 lines tells you which line code caused the problem</p>
+        <code class="mt-5" style="background-color: whitesmoke;">{{error.details}}</code>
+    }
+
+    
+</div>
