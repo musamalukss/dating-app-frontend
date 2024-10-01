@@ -1,4 +1,10 @@
-import { Component, HostListener, inject, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Member } from '../../_models/members';
 import { AccountsService } from '../../_services/accounts.service';
 import { MemberService } from '../../_services/member.service';
@@ -14,17 +20,16 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './member-edit.component.css',
 })
 export class MemberEditComponent implements OnInit {
-  @ViewChild('editForm') editForm? :NgForm;
-  @HostListener('window;beforeunload',['$event']) hostListener($event:any){
-    if(this.editForm?.dirty){
-      $event.returnvValue=true;
+  @ViewChild('editForm') editForm?: NgForm;
+  @HostListener('window;beforeunload', ['$event']) hostListener($event: any) {
+    if (this.editForm?.dirty) {
+      $event.returnvValue = true;
     }
-  };
+  }
   member?: Member;
   private accountService = inject(AccountsService);
   private memberService = inject(MemberService);
-  private tostr =inject(ToastrService);
-
+  private tostr = inject(ToastrService);
 
   ngOnInit(): void {
     this.loadMember();
@@ -42,8 +47,15 @@ export class MemberEditComponent implements OnInit {
   }
 
   UpdateMember() {
-    console.log(this.member);
-    this.tostr.success("Member Updated successfully");
-    this.editForm?.reset(this.member);
+   
+    if (this.editForm?.dirty) {
+      this.memberService.updateMember(this.editForm.value).subscribe({
+        next: (response) => {
+          this.tostr.success('Member Updated successfully');
+        },
+      });
+    }else{
+      this.tostr.error('Member data has not been changed');
+    }
   }
 }
