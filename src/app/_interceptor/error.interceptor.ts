@@ -25,7 +25,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
               toastr.error(error.error, error.status);
             }
             break;
-          case 400:
+          case 401:
             toastr.error('Unauthorized', error.status);
             break;
           case 404:
