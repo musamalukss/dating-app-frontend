@@ -8,6 +8,8 @@ import {
 } from 'ng2-file-upload';
 import { AccountsService } from '../../_services/accounts.service';
 import { environment } from '../../../environments/environment';
+import { MemberService } from '../../_services/member.service';
+import { Photo } from '../../_models/photo';
 
 @Component({
   selector: 'app-photo-editor',
@@ -21,6 +23,7 @@ export class PhotoEditorComponent implements OnInit {
     this.initializeUploader();
   }
   private accountService = inject(AccountsService);
+  private mamberService = inject(MemberService);
 
   member = input.required<Member>();
   uploader?: FileUploader;
@@ -53,5 +56,26 @@ export class PhotoEditorComponent implements OnInit {
       updatedMember.photos.push(photo);
       this.memberChange.emit(updatedMember);
     };
+  }
+
+  setMainPhoto(photo : Photo){
+    this.mamberService.setMainPhoto(photo).subscribe({
+      next : _ =>{
+        const user = this.accountService.currentUser();
+        if(user){
+          user.photoUrl = photo.url;
+          this.accountService.setCurrentUser(user);
+        }
+        const updatedMember = { ...this.member() };
+        updatedMember.photoUrl = photo.url;
+        updatedMember.photos.forEach( p => {
+          if(p.isMain) p.isMain = false;
+          if(p.id == photo.id) p.isMain = true;
+        })
+        this.memberChange.emit(updatedMember);
+
+
+      }
+    });
   }
 }
