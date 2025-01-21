@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { MemberService } from '../../_services/member.service';
 import { ActivatedRoute } from '@angular/router';
 import { Member } from '../../_models/members';
@@ -10,7 +10,8 @@ import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
   standalone: true,
   imports: [TabsModule,GalleryModule ],
   templateUrl: './member-detail.component.html',
-  styleUrl: './member-detail.component.css'
+  styleUrl: './member-detail.component.css',
+  changeDetection : ChangeDetectionStrategy.OnPush,
 })
 export class MemberDetailComponent implements OnInit{
  
@@ -34,7 +35,6 @@ export class MemberDetailComponent implements OnInit{
 
       } 
     })
-
   }
 
 
